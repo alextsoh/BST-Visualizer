@@ -11,6 +11,5 @@
  
  3.traversals
  
- 4.delete *TODO
  
 ![image](https://user-images.githubusercontent.com/56512088/203374153-887ba541-8a71-4898-b6e6-f2825c33c402.png)
