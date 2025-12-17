@@ -8,6 +8,13 @@ function setup() {
   
 }
 
+// Helper function to display traversal text
+function displayTraversalText(label, values, yPosition) {
+  fill('white');
+  textAlign(LEFT);
+  text(label + ": " + values, 10, yPosition);
+}
+
 function add(){
   
   tree.addValue(this.int(document.getElementById("value").value));
@@ -23,15 +30,10 @@ function add(){
   var inorder=traversal.a1,
       preorder=traversal.a2
       postorder=traversal.a3;
-  fill('white');
-  textAlign(LEFT);
-  text("inorder : " + inorder, 10, 30);
-  fill('white');
-  textAlign(LEFT);
-  text("preorder: " + preorder,10,50);
-  fill('white');
-  textAlign(LEFT);
-  text("postorder: " + postorder,10,70)
+  
+  displayTraversalText("inorder ", inorder, 30);
+  displayTraversalText("preorder", preorder, 50);
+  displayTraversalText("postorder", postorder, 70);
   
 }
 
