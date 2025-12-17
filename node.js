@@ -129,7 +129,7 @@ Node.prototype.visit = function(parent) {
         this.left = n;
         this.setChildPosition(this.left, true);
       } else {
-        this.left.addNode(n)
+        this.left.addNode(n);
       }
     } else if (n.value > this.value) {
       if (this.right == null) {

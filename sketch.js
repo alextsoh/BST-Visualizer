@@ -31,7 +31,7 @@ function add(){
       preorder=traversal.a2
       postorder=traversal.a3;
   
-  displayTraversalText("inorder ", inorder, 30);
+  displayTraversalText("inorder", inorder, 30);
   displayTraversalText("preorder", preorder, 50);
   displayTraversalText("postorder", postorder, 70);
   
