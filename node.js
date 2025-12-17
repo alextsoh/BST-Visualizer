@@ -52,35 +52,30 @@ Array.prototype.remove = function() {
   return this;
 }
 
+// Helper function to update traversal array by removing duplicates and adding value
+function updateTraversalArray(arr, value) {
+  if (arr.includes(value)) {
+    arr.remove(value);
+  }
+  arr.push(value);
+}
 
 Node.prototype.Traversals = function(parent)
 {
   
-  if (preorderArr.includes(this.value)){
-    preorderArr.remove(this.value);
-  }
-  preorderArr.push(this.value);
+  updateTraversalArray(preorderArr, this.value);
 
   if (this.left != null) {
     this.left.Traversals(this);
   }
 
-
-  if (inorderArr.includes(this.value)){
-    inorderArr.remove(this.value);
-  }
-  inorderArr.push(this.value);
+  updateTraversalArray(inorderArr, this.value);
   
-
   if (this.right != null) {
     this.right.Traversals(this);
   }
 
-
-  if (postorderArr.includes(this.value)){
-    postorderArr.remove(this.value);
-  }
-  postorderArr.push(this.value);
+  updateTraversalArray(postorderArr, this.value);
 
 return {arr1:inorderArr,
         arr2:preorderArr,
@@ -114,37 +109,32 @@ Node.prototype.visit = function(parent) {
   }
  
   
+  // Helper function to calculate child node position
+  Node.prototype.setChildPosition = function(child, isLeft) {
+    child.seq = this.seq + 1;
+    var direction = isLeft ? -1 : 1;
+    
+    if (child.seq == 2) {
+      child.x = this.x + direction * (250 - 20 * child.seq);
+      child.y = this.y + 50 + 10 * child.seq;
+    } else {
+      child.x = this.x + direction * (150 - 20 * child.seq);
+      child.y = this.y + 50 + 5 * child.seq;
+    }
+  }
+
   Node.prototype.addNode = function(n) {
     if (n.value < this.value) {
       if (this.left == null) {
         this.left = n;
-        this.left.seq=this.seq+1;
-
-        if (this.left.seq==2){
-        this.left.x = this.x - 250 + 20*this.left.seq;
-        this.left.y = this.y + 50 + 10*this.left.seq;
-        }
-        else{
-        this.left.x = this.x - 150 + 20*this.left.seq;
-        this.left.y = this.y + 50 + 5*this.left.seq;
-        }
+        this.setChildPosition(this.left, true);
       } else {
-        this.left.addNode(n)
+        this.left.addNode(n);
       }
     } else if (n.value > this.value) {
       if (this.right == null) {
         this.right = n;
-        this.right.seq=this.seq+1;
-
-        if (this.right.seq==2){
-        this.right.x = this.x + 250 - 20*this.right.seq;
-        this.right.y = this.y + 50 + 10*this.right.seq;
-        }
-        else{
-        this.right.x = this.x + 150 - 20*this.right.seq;
-        this.right.y = this.y + 50 + 5*this.right.seq;
-      }
-  
+        this.setChildPosition(this.right, false);
       } else {
         this.right.addNode(n);
       }
